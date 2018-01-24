@@ -7,10 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.swing.text.View;
 import javax.validation.Valid;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +16,7 @@ import java.util.List;
 public class AppointmentController {
     @Autowired
     AppointmentService appointmentService;
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model) {
         List<Appointment> appointments = appointmentService.findAll();
@@ -65,5 +63,12 @@ public class AppointmentController {
         }
         appointmentService.save(appointment);
         return "redirect:/appointments";
+    }
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String search(@RequestParam (value = "searchKeyword", required = false) String keyword, Model model){
+        //find matching appointments and add them to the view model.
+        List<Appointment> appointments = appointmentService.find(keyword);
+        model.addAttribute("appointments", appointments);
+        return "index";
     }
 }

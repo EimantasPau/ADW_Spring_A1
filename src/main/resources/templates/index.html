@@ -13,15 +13,16 @@
                 <div class="card-body">
                     <h5>My appointments</h5>
                     <a class="btn btn-primary mb-3" th:href="@{/appointments/create}">Create new appointment</a>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..."/>
-                        <span class="input-group-btn">
-                        <button class="btn btn-secondary" type="button">Go!</button>
+                    <form action="" th:action="@{/appointments/search}" method="GET">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..." name="searchKeyword"/>
+                            <span class="input-group-btn">
+                        <button type="submit" class="btn btn-secondary">Go!</button>
                     </span>
-                    </div>
+                        </div>
+                    </form>
 
-                    <div th:if="${appointments.isEmpty()}">You do not have any appointments at the moment.</div>
-
+                    <div th:if="${appointments.isEmpty()}">Could not find any appointments.</div>
                     <table class="table" th:if="${!appointments.isEmpty()}">
                         <thead>
                         <tr>

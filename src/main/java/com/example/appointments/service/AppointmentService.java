@@ -15,4 +15,7 @@ public class AppointmentService {
     public Appointment save(Appointment a) { return appointmentRepository.save(a);}
     public void delete(Appointment a) {  appointmentRepository.delete(a);}
     public List<Appointment> findAll() { return appointmentRepository.findAll();}
+    //use the same keyword for title, description and patient name
+    public List<Appointment> find(String keyword) {
+        return appointmentRepository.findByTitleContainingOrDescriptionContainingOrPatientName(keyword, keyword, keyword);}
 }
