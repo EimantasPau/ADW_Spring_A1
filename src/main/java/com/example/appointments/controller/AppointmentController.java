@@ -42,4 +42,16 @@ public class AppointmentController {
         appointmentService.delete(appointment);
         return "redirect:/appointments";
     }
+
+    @RequestMapping(value = "/update/{appointment}", method = RequestMethod.GET)
+    public String updateView(Model model, @PathVariable Appointment appointment){
+        model.addAttribute(appointment);
+        return "update";
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String update(Model model, @ModelAttribute("appointment") Appointment appointment){
+        appointmentService.save(appointment);
+        return "redirect:/appointments";
+    }
 }
