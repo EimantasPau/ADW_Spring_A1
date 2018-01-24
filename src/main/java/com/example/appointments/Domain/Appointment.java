@@ -1,5 +1,6 @@
 package com.example.appointments.domain;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
@@ -12,25 +13,28 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotEmpty
     private String title;
+    @NotEmpty
     private String description;
+    @NotEmpty
     private String time;
+    @NotEmpty
     private String location;
+    @NotEmpty
     private String patientName;
-    private Date createdAt;
 
     public Appointment(){
 
     }
 
-    public Appointment(Long id, String title, String description, String time, String location, String patientName, Date createdAt) {
+    public Appointment(Long id, String title, String description, String time, String location, String patientName) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.time = time;
         this.location = location;
         this.patientName = patientName;
-        this.createdAt = createdAt;
     }
 
     public Long getId() {
@@ -81,12 +85,5 @@ public class Appointment {
         this.patientName = patientName;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
 
 }

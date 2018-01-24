@@ -5,9 +5,11 @@ import com.example.appointments.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.View;
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +35,12 @@ public class AppointmentController {
     }
 
     @RequestMapping(value="/create", method= RequestMethod.POST)
-    public String create(Model model, @ModelAttribute("appointment") Appointment appointment) {
+    public String create(Model model, @Valid @ModelAttribute("appointment") Appointment appointment, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            model.addAttribute("appointment", appointment);
+            model.addAttribute("error", "Please fill out all of the fields.");
+            return "create";
+        }
         appointmentService.save(appointment);
         return "redirect:/appointments";
     }
@@ -50,7 +57,12 @@ public class AppointmentController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(Model model, @ModelAttribute("appointment") Appointment appointment){
+    public String update(Model model,@Valid @ModelAttribute("appointment") Appointment appointment, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            model.addAttribute("appointment", appointment);
+            model.addAttribute("error", "Please fill out all of the fields.");
+            return "update";
+        }
         appointmentService.save(appointment);
         return "redirect:/appointments";
     }
