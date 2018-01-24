@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="base" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Appointments</title>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="card">
+                <h5>My appointments</h5>
+                <a class="btn btn-primary mb-3" th:href="@{/appointments/create}">Create new appointment</a>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..."/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary" type="button">Go!</button>
+                    </span>
+                </div>
+
+                <div>You do not have any appointments at the moment.</div>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Patient's name</th>
+                        <th>Time</th>
+                        <th>Location</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="appointment : ${appointments}">
+                        <td th:text="${appointment.title}"></td>
+                        <td th:text="${appointment.description}"></td>
+                        <td th:text="${appointment.patientName}"></td>
+                        <td th:text="${appointment.time}"></td>
+                        <td th:text="${appointment.location}"></td>
+                        <td><i class="material-icons">mode_edit</i><i class="material-icons">delete</i></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

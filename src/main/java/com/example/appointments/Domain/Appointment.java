@@ -1,13 +1,20 @@
-package com.example.appointments.Domain;
+package com.example.appointments.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
-
+@Entity
 public class Appointment {
-
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String title;
     private String description;
-    private Date time;
+    private String time;
     private String location;
     private String patientName;
     private Date createdAt;
@@ -16,8 +23,7 @@ public class Appointment {
 
     }
 
-    public Appointment(int id, String title, String description, Date time, String location, String patientName, Date createdAt) {
-
+    public Appointment(Long id, String title, String description, String time, String location, String patientName, Date createdAt) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -27,11 +33,11 @@ public class Appointment {
         this.createdAt = createdAt;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,11 +57,11 @@ public class Appointment {
         this.description = description;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
@@ -82,6 +88,5 @@ public class Appointment {
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
-
 
 }
