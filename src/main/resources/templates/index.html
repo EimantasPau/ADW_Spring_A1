@@ -21,7 +21,9 @@
                     </span>
                         </div>
                     </form>
-
+                    <div th:if="${successMessage != null}" class="alert alert-success" role="alert">
+                        <span th:text="${successMessage}"></span>
+                    </div>
                     <div th:if="${appointments.isEmpty()}">Could not find any appointments.</div>
                     <table class="table" th:if="${!appointments.isEmpty()}">
                         <thead>

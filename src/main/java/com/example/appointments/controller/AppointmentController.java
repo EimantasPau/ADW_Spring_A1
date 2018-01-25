@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
@@ -33,18 +35,20 @@ public class AppointmentController {
     }
 
     @RequestMapping(value="/create", method= RequestMethod.POST)
-    public String create(Model model, @Valid @ModelAttribute("appointment") Appointment appointment, BindingResult bindingResult) {
+    public String create(Model model, @Valid @ModelAttribute("appointment") Appointment appointment, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if(bindingResult.hasErrors()){
             model.addAttribute("appointment", appointment);
             model.addAttribute("error", "Please fill out all of the fields.");
             return "create";
         }
         appointmentService.save(appointment);
+        redirectAttributes.addFlashAttribute("successMessage", "You have successfully created an appointment.");
         return "redirect:/appointments";
     }
     @RequestMapping(value="/delete/{appointment}", method = RequestMethod.GET)
-    public String delete(@PathVariable Appointment appointment) {
+    public String delete(@PathVariable Appointment appointment, RedirectAttributes redirectAttributes) {
         appointmentService.delete(appointment);
+        redirectAttributes.addFlashAttribute("successMessage", "Appointment deleted.");
         return "redirect:/appointments";
     }
 
@@ -55,7 +59,7 @@ public class AppointmentController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(Model model,@Valid @ModelAttribute("appointment") Appointment appointment, BindingResult bindingResult){
+    public String update(Model model,@Valid @ModelAttribute("appointment") Appointment appointment, BindingResult bindingResult, RedirectAttributes redirectAttributes){
         //check for validation errors
         if(bindingResult.hasErrors()){
             model.addAttribute("appointment", appointment);
@@ -63,6 +67,7 @@ public class AppointmentController {
             return "update";
         }
         appointmentService.save(appointment);
+        redirectAttributes.addFlashAttribute("successMessage", "You have successfully updated an appointment.");
         return "redirect:/appointments";
     }
     @RequestMapping(value = "/search", method = RequestMethod.GET)
