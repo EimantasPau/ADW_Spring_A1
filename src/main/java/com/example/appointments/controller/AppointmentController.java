@@ -56,6 +56,7 @@ public class AppointmentController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(Model model,@Valid @ModelAttribute("appointment") Appointment appointment, BindingResult bindingResult){
+        //check for validation errors
         if(bindingResult.hasErrors()){
             model.addAttribute("appointment", appointment);
             model.addAttribute("error", "Please fill out all of the fields.");

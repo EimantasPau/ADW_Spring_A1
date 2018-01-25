@@ -17,5 +17,5 @@ public class AppointmentService {
     public List<Appointment> findAll() { return appointmentRepository.findAll();}
     //use the same keyword for title, description and patient name
     public List<Appointment> find(String keyword) {
-        return appointmentRepository.findByTitleContainingOrDescriptionContainingOrPatientName(keyword, keyword, keyword);}
+        return appointmentRepository.findByTitleContainingOrDescriptionContainingOrPatientNameContaining(keyword, keyword, keyword);}
 }
