@@ -77,4 +77,10 @@ public class AppointmentController {
         model.addAttribute("appointments", appointments);
         return "index";
     }
+
+    @RequestMapping(value = "/{appointment}")
+    public String show(Model model, @PathVariable Appointment appointment){
+        model.addAttribute("appointment", appointment);
+        return "show";
+    }
 }

@@ -43,6 +43,7 @@
                             <td th:text="${appointment.patientName}"></td>
                             <td th:text="${appointment.time}"></td>
                             <td th:text="${appointment.location}"></td>
+                            <td><a href="#" th:href="@{/appointments/}+${appointment.id}"><i class="material-icons">description</i></a></td>
                             <td><a href="#" th:href="@{/appointments/update/}+${appointment.id}"><i class="material-icons">mode_edit</i></a></td>
                             <td><a href="#" th:href="@{/appointments/delete/}+${appointment.id}"><i class="material-icons">delete</i></a></td>
                         </tr>
